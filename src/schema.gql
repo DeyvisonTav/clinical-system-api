@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ConsultancyOutput {
+  accountHolderName: String!
+  city: String!
+  cnpj: String!
+  complement: String!
+  cpf: String!
+  id: String!
+  name: String!
+  neighborhood: String!
+  number: String!
+  officialEmail: String!
+  primaryPhone: String!
+  secondaryPhone: String!
+  state: String!
+  status: String!
+  street: String!
+  zipCode: String!
+}
+
+input CreateConsultancyInput {
+  accountHolderName: String!
+  city: String!
+  cnpj: String!
+  complement: String!
+  cpf: String!
+  name: String!
+  neighborhood: String!
+  number: String!
+  officialEmail: String!
+  primaryPhone: String!
+  secondaryPhone: String!
+  state: String!
+  status: String!
+  street: String!
+  zipCode: String!
+}
+
+type Mutation {
+  createConsultancy(data: CreateConsultancyInput!): ConsultancyOutput!
+}
+
+type Query {
+  consultancies: [ConsultancyOutput!]!
+}
