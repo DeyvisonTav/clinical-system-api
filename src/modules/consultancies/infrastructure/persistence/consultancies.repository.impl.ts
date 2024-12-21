@@ -18,7 +18,7 @@ export class ConsultanciesRepositoryImpl extends ConsultanciesRepository {
   }
 
   async findAll(): Promise<Consultancy[]> {
-    return this.repository.find();
+    return this.repository.find({ relations: ['professionals'] });
   }
 
   async findById(id: string): Promise<Consultancy | null> {

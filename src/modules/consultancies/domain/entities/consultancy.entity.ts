@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Professional } from '../../../professionals/domain/entities/professional.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity('consultancies')
 export class Consultancy {
@@ -49,4 +50,7 @@ export class Consultancy {
 
   @Column()
   status: string;
+
+  @OneToMany(() => Professional, (professional) => professional.clinic)
+  professionals: Professional[];
 }

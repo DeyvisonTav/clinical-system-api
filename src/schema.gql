@@ -14,6 +14,7 @@ type ConsultancyOutput {
   number: String!
   officialEmail: String!
   primaryPhone: String!
+  professionals: [ProfessionalOutput!]
   secondaryPhone: String!
   state: String!
   status: String!
