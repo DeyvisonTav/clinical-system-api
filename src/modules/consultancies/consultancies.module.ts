@@ -5,9 +5,15 @@ import { ConsultanciesRepositoryImpl } from './infrastructure/persistence/consul
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Consultancy } from './domain/entities/consultancy.entity';
 import { ConsultanciesRepository } from './domain/repositories/consultancies.repository';
+import { ProfessionalsModule } from '../professionals/professionals.module';
+import { PermissionsModule } from '../permissions/permissions.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Consultancy])],
+  imports: [
+    TypeOrmModule.forFeature([Consultancy]),
+    ProfessionalsModule,
+    PermissionsModule,
+  ],
   providers: [
     ConsultanciesResolver,
     ConsultanciesService,

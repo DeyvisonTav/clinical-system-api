@@ -16,5 +16,6 @@ import { ProfessionalsRepository } from './domain/repositories/professionals.rep
       useClass: ProfessionalsRepositoryImpl,
     },
   ],
+  exports: [ProfessionalsService],
 })
 export class ProfessionalsModule {}

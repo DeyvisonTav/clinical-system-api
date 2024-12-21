@@ -13,5 +13,6 @@ import { PermissionsRepository } from './domain/repositories/permissions.reposit
     PermissionsService,
     { provide: PermissionsRepository, useClass: PermissionsRepositoryImpl },
   ],
+  exports: [PermissionsService],
 })
 export class PermissionsModule {}
