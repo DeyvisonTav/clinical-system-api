@@ -1,42 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PermissionsRepository } from '../../domain/repositories/permissions.repository';
-import { Professional } from '../../../professionals/domain/entities/professional.entity';
 import { CreatePermissionInput } from '../dto/create-permission.input';
-import { UpdatePermissionInput } from '../dto/update-permission.input';
 
 @Injectable()
-export class PermissionsService {
+export class PermissionsService implements OnModuleInit {
   constructor(private readonly repository: PermissionsRepository) {}
 
+  async onModuleInit() {
+    await this.seedPermissions();
+  }
+
+  private async seedPermissions() {
+    const permissions = [
+      { level: 'Dentista' },
+      { level: 'Secretário(a)' },
+      { level: 'Assistente' },
+      { level: 'Admin' },
+    ];
+
+    for (const permission of permissions) {
+      const existingPermission = await this.findByLevel(permission.level);
+      if (!existingPermission) {
+        await this.create({
+          level: permission.level,
+          professionalsIds: [],
+        });
+        console.log(`Permission ${permission.level} created.`);
+      } else {
+        console.log(`Permission ${permission.level} already exists.`);
+      }
+    }
+  }
+
   async create(data: CreatePermissionInput) {
-    const permission = await this.repository.create({
+    return this.repository.create({
       level: data.level,
-      professionals: data.professionalsIds.map(
-        (id) => ({ id }) as Professional,
-      ),
+      professionals: data.professionalsIds.map((id) => ({ id }) as any),
     });
-    return permission;
+  }
+
+  async findByLevel(level: string) {
+    return this.repository.findByLevel(level);
   }
 
   async findAll() {
     return this.repository.findAll();
-  }
-
-  async findById(id: string) {
-    return this.repository.findById(id);
-  }
-
-  async update(id: string, data: UpdatePermissionInput) {
-    const permission = await this.repository.findById(id);
-    if (!permission) {
-      throw new Error('Permission not found');
-    }
-    return this.repository.create({
-      ...permission,
-      ...data,
-      professionals: data.professionalsIds.map(
-        (id) => ({ id }) as Professional,
-      ),
-    });
   }
 }
