@@ -39,10 +39,34 @@ input CreateConsultancyInput {
   zipCode: String!
 }
 
+input CreateProfessionalInput {
+  clinicId: String!
+  cpf: String!
+  cro: String!
+  email: String!
+  fullName: String!
+  password: String!
+  permissionId: String!
+  primaryPhone: String!
+}
+
 type Mutation {
   createConsultancy(data: CreateConsultancyInput!): ConsultancyOutput!
+  createProfessional(data: CreateProfessionalInput!): ProfessionalOutput!
+}
+
+type ProfessionalOutput {
+  clinicId: String!
+  cpf: String!
+  cro: String!
+  email: String!
+  fullName: String!
+  id: String!
+  permissionId: String!
+  primaryPhone: String!
 }
 
 type Query {
   consultancies: [ConsultancyOutput!]!
+  professionals: [ProfessionalOutput!]!
 }
