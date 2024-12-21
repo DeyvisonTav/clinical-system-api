@@ -39,6 +39,11 @@ input CreateConsultancyInput {
   zipCode: String!
 }
 
+input CreatePermissionInput {
+  level: String!
+  professionalsIds: [String!]!
+}
+
 input CreateProfessionalInput {
   clinicId: String!
   cpf: String!
@@ -52,7 +57,14 @@ input CreateProfessionalInput {
 
 type Mutation {
   createConsultancy(data: CreateConsultancyInput!): ConsultancyOutput!
+  createPermission(data: CreatePermissionInput!): PermissionOutput!
   createProfessional(data: CreateProfessionalInput!): ProfessionalOutput!
+}
+
+type PermissionOutput {
+  id: String!
+  level: String!
+  professionalsIds: [String!]!
 }
 
 type ProfessionalOutput {
@@ -68,5 +80,6 @@ type ProfessionalOutput {
 
 type Query {
   consultancies: [ConsultancyOutput!]!
+  permissions: [PermissionOutput!]!
   professionals: [ProfessionalOutput!]!
 }

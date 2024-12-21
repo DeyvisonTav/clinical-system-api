@@ -6,6 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Consultancy } from '../../../consultancies/domain/entities/consultancy.entity';
+import { Permission } from '../../../permissions/domain/entities/permission.entity';
 
 @Entity('professionals')
 export class Professional {
@@ -36,6 +37,10 @@ export class Professional {
 
   @Column()
   clinicId: string;
+
+  @ManyToOne(() => Permission)
+  @JoinColumn({ name: 'permissionId' })
+  permission: Permission;
 
   @Column()
   permissionId: string;
