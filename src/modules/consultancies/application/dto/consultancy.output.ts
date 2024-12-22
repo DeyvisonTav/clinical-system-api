@@ -1,5 +1,6 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 import { ProfessionalOutput } from '../../../professionals/application/dto/professional.output';
+import { PatientOutput } from '../../../patients/application/dto/patient.output';
 
 @ObjectType()
 export class ConsultancyOutput {
@@ -53,4 +54,7 @@ export class ConsultancyOutput {
 
   @Field(() => [ProfessionalOutput], { nullable: true })
   professionals?: ProfessionalOutput[];
+
+  @Field(() => [PatientOutput], { nullable: true })
+  patients?: PatientOutput[];
 }

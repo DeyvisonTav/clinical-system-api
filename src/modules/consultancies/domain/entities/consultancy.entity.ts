@@ -1,3 +1,4 @@
+import { Patient } from '../../../patients/domain/entities/patient.entity';
 import { Professional } from '../../../professionals/domain/entities/professional.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 @Entity('consultancies')
@@ -52,4 +53,7 @@ export class Consultancy {
 
   @OneToMany(() => Professional, (professional) => professional.clinic)
   professionals: Professional[];
+
+  @OneToMany(() => Patient, (patient) => patient.clinic)
+  patients: Patient[];
 }

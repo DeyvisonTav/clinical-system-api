@@ -18,13 +18,15 @@ export class ConsultanciesRepositoryImpl extends ConsultanciesRepository {
   }
 
   async findAll(): Promise<Consultancy[]> {
-    return this.repository.find({ relations: ['professionals'] });
+    return this.repository.find({ relations: ['professionals', 'patients'] });
   }
 
   async findById(id: string): Promise<Consultancy | null> {
-    return this.repository.findOneBy({ id });
+    return this.repository.findOne({
+      where: { id },
+      relations: ['professionals', 'patients'],
+    });
   }
-
   async findByCpf(cpf: string): Promise<Consultancy> {
     return this.repository.findOneBy({ cpf });
   }

@@ -16,4 +16,9 @@ export class ConsultanciesResolver {
   async createConsultancy(@Args('data') data: CreateConsultancyInput) {
     return this.service.create(data);
   }
+
+  @Query(() => ConsultancyOutput)
+  async consultancy(@Args('id') id: string) {
+    return this.service.findById(id);
+  }
 }

@@ -33,6 +33,7 @@ type ConsultancyOutput {
   neighborhood: String!
   number: String!
   officialEmail: String!
+  patients: [PatientOutput!]
   primaryPhone: String!
   professionals: [ProfessionalOutput!]
   secondaryPhone: String!
@@ -147,6 +148,7 @@ type ProfessionalOutput {
 
 type Query {
   consultancies: [ConsultancyOutput!]!
+  consultancy(id: String!): ConsultancyOutput!
   patient(id: String!): PatientOutput!
   patients(filters: FilterPatientInput, limit: Float, page: Float): [PatientOutput!]!
   permissions: [PermissionOutput!]!

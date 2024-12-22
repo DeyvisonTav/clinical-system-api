@@ -55,7 +55,9 @@ export class Patient {
     zipCode: string;
   };
 
-  @ManyToOne(() => Consultancy, { nullable: false })
+  @ManyToOne(() => Consultancy, (clinic) => clinic.patients, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'clinic_id' })
   clinic: Consultancy;
 

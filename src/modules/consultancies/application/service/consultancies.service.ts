@@ -38,4 +38,8 @@ export class ConsultanciesService {
   async findAll() {
     return this.repository.findAll();
   }
+
+  async findById(id: string) {
+    return this.repository.findById(id);
+  }
 }
