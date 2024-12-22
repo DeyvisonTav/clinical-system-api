@@ -2,6 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input AddressInput {
+  city: String!
+  complement: String
+  neighborhood: String!
+  number: String!
+  state: String!
+  street: String!
+  zipCode: String!
+}
+
+type AddressOutput {
+  city: String!
+  complement: String
+  neighborhood: String!
+  number: String!
+  state: String!
+  street: String!
+  zipCode: String!
+}
+
 type ConsultancyOutput {
   accountHolderName: String!
   city: String!
@@ -40,6 +60,20 @@ input CreateConsultancyInput {
   zipCode: String!
 }
 
+input CreatePatientInput {
+  address: AddressInput
+  birth_date: DateTime
+  clinic_id: String!
+  cpf: String!
+  dental_plan_name: String
+  dental_plan_number: String
+  email: String
+  name: String!
+  phone: String!
+  responsible_name: String
+  responsible_phone: String
+}
+
 input CreatePermissionInput {
   level: String!
   professionalsIds: [String!]!
@@ -56,10 +90,42 @@ input CreateProfessionalInput {
   primaryPhone: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input FilterPatientInput {
+  cpf: String
+  name: String
+  phone: String
+}
+
 type Mutation {
   createConsultancy(data: CreateConsultancyInput!): ConsultancyOutput!
+  createPatient(data: CreatePatientInput!): PatientOutput!
   createPermission(data: CreatePermissionInput!): PermissionOutput!
   createProfessional(data: CreateProfessionalInput!): ProfessionalOutput!
+  deletePatient(id: String!): Boolean!
+  updatePatient(data: UpdatePatientInput!, id: String!): PatientOutput!
+}
+
+type PatientOutput {
+  address: AddressOutput
+  birth_date: DateTime
+  clinic_id: String!
+  cpf: String!
+  created_at: DateTime!
+  dental_plan_name: String
+  dental_plan_number: String
+  email: String
+  id: String!
+  name: String!
+  phone: String!
+  public_id: Float!
+  responsible_name: String
+  responsible_phone: String
+  updated_at: DateTime!
 }
 
 type PermissionOutput {
@@ -81,6 +147,22 @@ type ProfessionalOutput {
 
 type Query {
   consultancies: [ConsultancyOutput!]!
+  patient(id: String!): PatientOutput!
+  patients(filters: FilterPatientInput, limit: Float, page: Float): [PatientOutput!]!
   permissions: [PermissionOutput!]!
   professionals: [ProfessionalOutput!]!
+}
+
+input UpdatePatientInput {
+  address: AddressInput
+  birth_date: DateTime
+  clinic_id: String
+  cpf: String
+  dental_plan_name: String
+  dental_plan_number: String
+  email: String
+  name: String
+  phone: String
+  responsible_name: String
+  responsible_phone: String
 }
