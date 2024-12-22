@@ -1,6 +1,5 @@
 import { Professional } from '../../../professionals/domain/entities/professional.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-
 @Entity('consultancies')
 export class Consultancy {
   @PrimaryGeneratedColumn('uuid')
@@ -9,11 +8,14 @@ export class Consultancy {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   cnpj?: string;
 
   @Column()
   accountHolderName: string;
+
+  @Column({ unique: true })
+  officialEmail: string;
 
   @Column()
   cpf: string;
@@ -45,11 +47,8 @@ export class Consultancy {
   @Column({ nullable: true })
   secondaryPhone?: string;
 
-  @Column()
-  officialEmail: string;
-
-  @Column()
-  status: string;
+  @Column({ default: true })
+  status: boolean;
 
   @OneToMany(() => Professional, (professional) => professional.clinic)
   professionals: Professional[];

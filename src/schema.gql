@@ -35,7 +35,7 @@ input CreateConsultancyInput {
   primaryPhone: String!
   secondaryPhone: String!
   state: String!
-  status: String!
+  status: Boolean!
   street: String!
   zipCode: String!
 }

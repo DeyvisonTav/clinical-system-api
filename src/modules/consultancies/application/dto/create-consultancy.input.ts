@@ -4,8 +4,7 @@ import {
   IsOptional,
   IsString,
   IsNotEmpty,
-  IsNumber,
-  IsEnum,
+  IsBoolean,
 } from 'class-validator';
 
 @InputType()
@@ -80,7 +79,8 @@ export class CreateConsultancyInput {
   @IsNotEmpty()
   officialEmail: string;
 
-  @Field(() => String)
-  @IsEnum(['ACTIVE', 'INACTIVE'])
-  status: 'ACTIVE' | 'INACTIVE';
+  @Field()
+  @IsBoolean()
+  @IsOptional()
+  status?: boolean;
 }
